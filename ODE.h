@@ -1,18 +1,33 @@
 #pragma once
-
-class ODE
-{
-private: 
-	int eq_dim, par_dim;
-
+/*
+class ODE {
+	int _dim;
+	int _par_dim;	
 public:
-	inline virtual int EQ_DIM() { return eq_dim; }
-	inline virtual int PAR_DIM() { return par_dim; }
+	ODE(int dim, int par_dim) : _dim(dim), _par_dim(par_dim) {};
+	virtual ~ODE() {};
 
-	ODE(int eq_d, int par_d) : eq_dim(eq_d), par_dim(par_d) {}
-	virtual ~ODE() {}
+	virtual inline void f(double, const double*, double*, const double*) const = 0;
+	virtual inline void jac(double, const double*, double*, const double*) const = 0;
 
-	//void (*F)(const double&, const double*&, double*&, const double*&);
-	virtual void F(const double&, const double*&, double*&, const double*&) const {};
+	inline int dim() { return _dim; }
+	inline int par_dim() { return _par_dim; }
 };
+*/
+
+typedef int (dimension)();
+typedef void (RHS)(double t, const double* x, double* y, const double* p);
+
+template<class T>
+struct ODE {	
+	ODE() = delete;
+	static constexpr dimension* dimp() { return &T::dim; }
+	static constexpr dimension* par_dimp() { return &T::par_dim; }
+	static inline RHS* rhsp() { return &T::rhs; }
+	static inline RHS* jacp() { return &T::jac; }
+};
+
+
+
+#include "Linear.h"
 

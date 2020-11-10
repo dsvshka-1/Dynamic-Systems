@@ -23,10 +23,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DOPRI5.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
     <ClInclude Include="ODE.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="DOPRI5.h">
+    <ClInclude Include="Linear.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

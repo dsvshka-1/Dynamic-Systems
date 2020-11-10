@@ -1,19 +1,26 @@
 ﻿// Dynamic Systems.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
+#include "DOPRI5.h"
+#include "ODE.h"
 #include <iostream>
 
 using namespace std;
 
-int main()
-{
-    int n[10];
-    n[0] = 15;
 
-    cout << n << endl;
-    cout << *n << endl;
-    cout << sizeof(n) << endl;
-    cout << sizeof(*n) << endl;
+int main()
+{	
+	double* x = new double[2]{ 1,0 };
+	double* y = new double[2]{ 0,0 };
+	double* p = new double[4]{ 0,1,-1,0 };
+
+	DOPRI5 dopr;
+	dopr.portrait(2, 4, 0, x, p, Linear<2>::rhsp(),"D:\\test.txt");
+	/*
+	Linear<2>::rhs(0, x, y, p);
+
+	cout << y[0] << ' ' << y[1];*/
+	return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
